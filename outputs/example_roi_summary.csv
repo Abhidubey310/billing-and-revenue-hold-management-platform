@@ -1,0 +1,12 @@
+metric,value,unit
+Annual cases reviewed,7200,cases
+Manual effort before,1440,hours
+Effort after automation,480,hours
+Direct processing hours saved,960,hours
+Rework hours saved,144,hours
+Total annual hours saved,1104,hours
+Capacity equivalent,0.61,FTE
+Annual gross benefit,24288,GBP
+Annual net benefit,18288,GBP
+First-year ROI,1.2,%
+Estimated payback period,11.81,months
