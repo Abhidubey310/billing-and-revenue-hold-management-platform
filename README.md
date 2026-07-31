@@ -1,6 +1,6 @@
 # Billing & Revenue Hold Management Platform
 
-A synthetic portfolio project demonstrating how finance and operations teams can classify billing holds, quantify revenue exposure, assign ownership, prioritise ageing, and recommend the next action.
+A synthetic portfolio project demonstrating how finance and operations teams can classify billing holds, quantify revenue exposure, assign ownership, prioritise ageing, recommend the next action, and estimate potential automation value.
 
 > **Portfolio note:** This project is inspired by real-world finance transformation and billing-control experience. The implementation shown here has been independently recreated using fictional entities, synthetic data, and generic business rules. It contains no confidential, proprietary, or personally identifiable information.
 
@@ -23,8 +23,9 @@ The platform evaluates synthetic held-order records and produces:
 - an accountable owner team;
 - an action recommendation;
 - ageing and revenue-risk priority;
-- an explainable reason for each decision; and
-- a management summary of held value and case volume.
+- an explainable reason for each decision;
+- a management summary of held value and case volume; and
+- an editable ROI model showing potential time and cost benefits.
 
 ## Key capabilities
 
@@ -36,6 +37,7 @@ The platform evaluates synthetic held-order records and produces:
 - Exception and data-quality flags
 - Auditable decision reasons
 - Portfolio-level management summary
+- Time-saved, FTE-capacity, ROI, and payback modelling
 
 ## Solution flow
 
@@ -47,7 +49,21 @@ flowchart LR
     D --> E[Ageing and value prioritisation]
     E --> F[Action recommendation]
     F --> G[Case output and portfolio summary]
+    G --> H[Illustrative ROI model]
 ```
+
+## Illustrative automation value
+
+The repository includes a transparent, editable ROI calculator. Using the current sample assumptions, it estimates:
+
+- **1,104 annual hours released**;
+- **0.61 FTE equivalent capacity**;
+- **£24,288 annual gross benefit**;
+- **£18,288 annual net benefit** after support cost;
+- **approximately 11.8 months payback**; and
+- **1.2% first-year ROI**, with stronger economics from year two because the one-time build cost is not repeated.
+
+These figures are illustrative, not measured production results. Every assumption is visible in `data/roi_assumptions.csv` and can be replaced with validated business data.
 
 ## Repository structure
 
@@ -55,15 +71,19 @@ flowchart LR
 billing-and-revenue-hold-management-platform/
 ├── README.md
 ├── data/
-│   └── sample_billing_holds.csv
+│   ├── sample_billing_holds.csv
+│   └── roi_assumptions.csv
 ├── src/
-│   └── hold_management_engine.py
+│   ├── hold_management_engine.py
+│   └── roi_calculator.py
 ├── outputs/
-│   └── example_hold_recommendations.csv
+│   ├── example_hold_recommendations.csv
+│   └── example_roi_summary.csv
 ├── docs/
 │   ├── business_rules.md
 │   ├── solution_design.md
-│   └── portfolio_story.md
+│   ├── portfolio_story.md
+│   └── roi_methodology.md
 └── tests/
     └── test_hold_management_engine.py
 ```
@@ -81,6 +101,7 @@ billing-and-revenue-hold-management-platform/
 ```bash
 pip install -r requirements.txt
 python src/hold_management_engine.py
+python src/roi_calculator.py
 pytest -q
 ```
 
@@ -89,14 +110,19 @@ pytest -q
 - Faster resolution of billing blockers
 - Improved visibility of delayed revenue
 - Clearer accountability across teams
-- Reduced manual review effort
+- Reduced manual review and rework
 - Better prioritisation of high-value and aged cases
 - Stronger billing governance and auditability
+- Quantified capacity release and investment payback
 
 ## Portfolio positioning
 
-This project demonstrates the ability to translate a billing-control problem into a structured, explainable automation solution connecting finance operations, process governance, data analysis, and technology delivery.
+This project demonstrates the ability to translate a billing-control problem into a structured, explainable automation solution connecting finance operations, process governance, data analysis, technology delivery, and benefits realisation.
+
+## Important interpretation
+
+Time saved does not automatically equal cash saved. Depending on the operating model, the benefit may appear as released capacity, improved service levels, reduced rework, faster billing, avoided hiring, or earlier revenue release.
 
 ## Disclaimer
 
-This is an independent portfolio project built with synthetic data and generic business scenarios. It is intended for learning and portfolio demonstration only and should not be used for accounting, revenue-recognition, legal, credit, or customer decisions without appropriate professional review.
+This is an independent portfolio project built with synthetic data and generic business scenarios. All ROI figures are illustrative assumptions rather than measured employer results. It is intended for learning and portfolio demonstration only and should not be used for accounting, revenue-recognition, legal, credit, investment, or customer decisions without appropriate professional review.
