@@ -1,0 +1,13 @@
+case_id,customer_name,order_reference,hold_date,order_value,hold_reason,po_status,service_status,credit_status,contract_status,customer_response,last_update_date
+HOLD-001,Northstar Analytics,ORD-1001,2026-06-10,42000,Purchase order missing,Missing,Ready,Clear,Active,Pending,2026-07-28
+HOLD-002,Greenfield Services,ORD-1002,2026-05-15,18500,Awaiting service activation,Received,Not Ready,Clear,Active,Received,2026-07-25
+HOLD-003,Harbour Retail Group,ORD-1003,2026-03-20,76000,Credit review required,Received,Ready,Review,Active,Received,2026-07-20
+HOLD-004,Maplebridge Health,ORD-1004,2026-07-18,12500,Contract clarification,Received,Ready,Clear,Review,Pending,2026-07-30
+HOLD-005,Silverline Logistics,ORD-1005,2026-01-12,9800,Duplicate order suspected,Received,Ready,Clear,Active,Received,2026-07-15
+HOLD-006,Bluehaven Learning,ORD-1006,2026-07-27,54000,Purchase order missing,Missing,Ready,Clear,Active,Pending,2026-07-31
+HOLD-007,Redwood Manufacturing,ORD-1007,2026-04-08,31000,Awaiting customer confirmation,Received,Ready,Clear,Active,Pending,2026-07-18
+HOLD-008,Clearview Housing,ORD-1008,2026-02-01,88000,Data quality issue,Received,Ready,Clear,Active,Received,2026-07-10
+HOLD-009,Westbridge Foods,ORD-1009,2026-07-01,6500,No valid hold reason,Received,Ready,Clear,Active,Received,2026-07-29
+HOLD-010,Oakfield Consulting,ORD-1010,2026-05-02,23000,Contract clarification,Received,Ready,Clear,Review,Pending,2026-07-22
+HOLD-011,Pinecrest Media,ORD-1011,2026-06-22,47000,Awaiting service activation,Received,Not Ready,Clear,Active,Received,2026-07-26
+HOLD-012,Rivergate Systems,ORD-1012,2026-03-05,15000,Credit review required,Received,Ready,Blocked,Active,Received,2026-07-12
