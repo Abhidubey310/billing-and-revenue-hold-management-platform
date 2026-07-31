@@ -1,0 +1,11 @@
+metric,value,unit,notes
+monthly_hold_cases,600,cases,Illustrative monthly volume
+manual_minutes_per_case,12,minutes,Average manual review and routing time
+assisted_minutes_per_case,4,minutes,Average time after automation support
+working_months_per_year,12,months,Annual calculation basis
+loaded_hourly_cost,22,GBP,Illustrative fully loaded labour cost
+annual_support_cost,6000,GBP,Illustrative maintenance and support cost
+one_time_build_cost,18000,GBP,Illustrative implementation cost
+error_rework_rate_before,0.08,decimal,Illustrative share of cases requiring rework
+error_rework_rate_after,0.02,decimal,Illustrative share after automation
+rework_minutes_per_case,20,minutes,Average rework time per affected case
