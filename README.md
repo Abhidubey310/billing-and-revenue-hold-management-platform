@@ -2,58 +2,45 @@
 
 **Finance Transformation | Billing Controls | Revenue Operations | Decision Automation**
 
-A synthetic portfolio solution showing how held billing orders can be converted from a manual review queue into a controlled, prioritised and auditable workflow.
+This project models a finance problem I find particularly useful to solve: orders can sit on billing hold for weeks or months, but the underlying reasons, ownership and financial exposure are often spread across spreadsheets, emails and different systems.
 
-The platform validates held-order data, classifies the underlying blocker, assigns accountable ownership, prioritises cases using ageing and financial exposure, recommends the next action, and quantifies illustrative capacity/ROI impact.
+I recreated that problem using synthetic data and built a simple decision-support workflow around it.
 
-> **Portfolio integrity:** This project is independently recreated using fictional customers, synthetic data and generic business rules. It contains no employer code, customer information, proprietary procedures or confidential financial data.
+## The problem
 
-## Executive summary
+A billing team may know that an order is blocked, but still need to work out:
 
-### Business problem
-
-Billing holds are often managed through spreadsheets, email follow-up and repeated manual review. A finance team may know that an order is blocked, but not consistently know:
-
-- why it is blocked;
-- who owns resolution;
-- how long it has been outstanding;
+- why it is on hold;
+- who should resolve it;
+- how long it has been waiting;
 - how much billing value is exposed;
-- what the next action should be; or
-- which cases require immediate escalation.
+- what should happen next; and
+- which cases need escalation first.
 
-This creates delayed invoicing, weak accountability, ageing backlogs, avoidable rework and poor management visibility.
+That usually means repeated manual review, inconsistent ownership and poor visibility of the backlog.
 
-### Solution concept
+## What I built
 
-I designed a decision-support workflow that converts raw held-order records into a structured operational action queue.
+The prototype takes held-order data and turns it into an operational action queue. It validates the input, groups each hold into a standard category, assigns an owner, calculates age and value, applies a priority and recommends the next step.
 
-The solution:
+The logic is intentionally explainable. If a case cannot be classified confidently, it goes to manual review rather than forcing a decision.
 
-1. validates source data before processing;
-2. classifies each hold into a standard reason category;
-3. assigns an accountable owner team;
-4. calculates ageing and financial exposure;
-5. applies a transparent priority model;
-6. recommends the next operational action;
-7. preserves an explanation for every decision; and
-8. produces an illustrative benefits model for capacity and ROI.
+The tool does **not** release billing holds, recognise revenue or make accounting decisions automatically.
 
-The automation supports triage and workflow. It does **not** autonomously release billing holds, recognise revenue, change customer contracts or make accounting decisions.
+## Sample results
 
-## Demonstration results
+The synthetic dataset contains **12 held orders with £423.3k of illustrative billing value**.
 
-The included synthetic dataset contains **12 held orders with £423.3k of illustrative billing value**.
-
-| Priority | Cases | Interpretation |
+| Priority | Cases | What it means |
 |---|---:|---|
-| Critical | 4 | Very aged and/or high-value cases requiring immediate review |
+| Critical | 4 | Very aged and/or high-value cases needing immediate review |
 | High | 6 | Material ageing or value requiring prioritised action |
 | Medium | 1 | Standard managed exception |
 | Low | 1 | Lower-risk case within normal review tolerance |
 
-The engine routes the sample population across commercial documentation, service readiness, credit control, contract review, duplicate validation, customer dependency, data quality and manual-review exceptions.
+The sample covers missing purchase orders, service readiness, credit review, contract questions, duplicates, customer dependencies, data-quality issues and unclassified exceptions.
 
-## End-to-end operating model
+## Process flow
 
 ```mermaid
 flowchart LR
@@ -68,7 +55,7 @@ flowchart LR
     I --> J[Management reporting & audit trail]
 ```
 
-## Decision hierarchy
+## How the decision logic works
 
 ```mermaid
 flowchart TD
@@ -85,73 +72,52 @@ flowchart TD
     J -- No --> L[Unclassified Exception - manual review]
 ```
 
-The hierarchy is intentionally deterministic and explainable. If the engine cannot classify a case reliably, it routes it to manual review rather than inventing a decision.
-
 ## Example
 
-A fictional order for **Clearview Housing** has been on hold for 181 days with £88k of illustrative billing value. The source reason indicates a data-quality issue.
+A fictional order for **Clearview Housing** has been on hold for 181 days with £88k of billing value. The source issue is a data-quality problem.
 
-The engine produces:
+The engine returns:
 
 - **Category:** Data Quality
 - **Owner:** Revenue Operations
 - **Priority:** Critical
-- **Recommended action:** Correct source data and revalidate
-- **Decision reason:** `Data Quality; 181 days on hold; value 88,000`
+- **Next action:** Correct source data and revalidate
+- **Reason:** `Data Quality; 181 days on hold; value 88,000`
 
-This makes the recommendation transparent to Finance, Operations and audit reviewers.
+That gives the reviewer enough context to understand why the case was prioritised without having to reverse-engineer the logic.
 
-## Key capabilities demonstrated
+## Controls I included
 
-- Billing-hold classification
-- Revenue-exposure prioritisation
-- Ageing analysis
-- Owner-team assignment
-- Exception-based workflow design
-- Recommended-next-action logic
-- Data-quality controls
-- Auditable reason codes
-- Management prioritisation
-- Capacity and ROI modelling
+The important part of the design is not only the automation. The controls matter just as much:
 
-## Controls and governance
+- required-field checks before processing;
+- clear rule precedence;
+- an explicit manual-review route;
+- traceable reason codes;
+- human review before operational release; and
+- separation between workflow prioritisation and accounting judgement.
 
-Automation in Finance requires explicit controls. This prototype demonstrates:
+More detail is available in [Business Rules](docs/business_rules.md), [Controls & Governance](docs/controls_and_governance.md) and [Solution Design](docs/solution_design.md).
 
-- mandatory-field validation;
-- deterministic rule precedence;
-- an explicit unclassified-exception route;
-- human review before operational release;
-- separation of workflow prioritisation from accounting judgement;
-- traceable recommendation reasons; and
-- testable rule behaviour.
+## Illustrative benefits model
 
-See [Business Rules](docs/business_rules.md), [Controls & Governance](docs/controls_and_governance.md) and [Solution Design](docs/solution_design.md).
+I also included a transparent ROI calculator so the operational benefit can be challenged rather than hidden inside a headline number.
 
-## Enterprise implementation view
-
-A production version could integrate with:
-
-- **CRM / commercial data:** Salesforce or equivalent;
-- **ERP / billing:** NetSuite or another finance platform;
-- **service data:** delivery or fulfilment systems;
-- **workflow:** case management, ServiceNow or approval queues;
-- **analytics:** billing-risk dashboards, ageing trends and owner performance; and
-- **AI assistance:** exception summarisation, root-cause clustering and reviewer guidance, while retaining human approval for financial decisions.
-
-See the [Enterprise Implementation Blueprint](docs/enterprise_implementation_blueprint.md).
-
-## Illustrative automation value
-
-The repository includes a transparent ROI calculator. Using the current synthetic assumptions, it estimates:
+Using the current synthetic assumptions, it estimates:
 
 - **1,104 annual hours released**;
 - **0.61 FTE equivalent capacity**;
 - **£24,288 annual gross benefit**;
 - **£18,288 annual net benefit** after support cost; and
-- **approximately 11.8 months payback**.
+- **around 11.8 months payback**.
 
-These are **illustrative portfolio assumptions, not measured employer results**. The assumptions are deliberately visible in `data/roi_assumptions.csv` so the business case can be challenged and replaced with validated data.
+These are example assumptions only, not measured employer results. They can be changed in `data/roi_assumptions.csv`.
+
+## How this could work in an enterprise environment
+
+A production version could connect to CRM, ERP/billing, service-delivery data, case management and reporting tools. An AI layer could help summarise exceptions or cluster recurring root causes, but financial release decisions should remain controlled.
+
+See [Enterprise Implementation Blueprint](docs/enterprise_implementation_blueprint.md).
 
 ## Repository structure
 
@@ -178,15 +144,6 @@ billing-and-revenue-hold-management-platform/
     └── test_hold_management_engine.py
 ```
 
-## Technology
-
-- Python
-- pandas
-- pytest
-- CSV-based synthetic data
-- Mermaid process and architecture diagrams
-- GitHub documentation and version control
-
 ## Run locally
 
 ```bash
@@ -196,27 +153,10 @@ python src/roi_calculator.py
 pytest -q
 ```
 
-## What this project demonstrates professionally
+## Why I include this project in my portfolio
 
-This repository is designed to demonstrate **Finance Transformation**, not pure software development.
+It shows the kind of work I enjoy most: taking a messy finance process, defining clear rules and controls, improving ownership, automating repeatable decisions and then measuring whether the change actually creates value.
 
-**Business problem → process redesign → control framework → data rules → automation → exception management → human governance → benefits measurement**
+## Portfolio note
 
-It demonstrates capability across:
-
-- finance and billing transformation;
-- Order-to-Cash and revenue operations;
-- process discovery and future-state design;
-- business-rule and control design;
-- enterprise implementation thinking;
-- automation and data analysis;
-- benefits realisation / ROI; and
-- translation between Finance, Operations and Technology teams.
-
-## Interview / portfolio story
-
-A concise explanation is available in [Portfolio Story](docs/portfolio_story.md).
-
-## Disclaimer
-
-This is an independent portfolio project built solely with synthetic data and generic industry scenarios. It should not be represented as the exact codebase, data, operating procedure or control framework of any employer. It is not intended for accounting, revenue-recognition, legal, credit or customer decisions without appropriate professional review.
+This is an independent recreation built with fictional customers, synthetic data and generic business rules. It contains no employer code, confidential operating procedures, customer data or proprietary financial information.
